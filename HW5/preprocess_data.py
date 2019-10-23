@@ -67,6 +67,14 @@ for tokens in x_train:
 no_of_tokens = np.asarray(no_of_tokens)
 print('Total: ', np.sum(no_of_tokens), ' Min: ', np.min(no_of_tokens), ' Max: ', np.max(no_of_tokens), ' Mean: ', np.mean(no_of_tokens), ' Std: ', np.std(no_of_tokens))
 
+### word_to_id and id_to_word. associate an id to every unique token in the training data
+all_tokens = itertools.chain.from_iterable(x_train)
+word_to_id = {token: idx for idx, token in enumerate(set(all_tokens))}
+
+all_tokens = itertools.chain.from_iterable(x_train)
+id_to_word = [token for idx, token in enumerate(set(all_tokens))]
+id_to_word = np.asarray(id_to_word)
+
 ## let's sort the indices by word frequency instead of random
 x_train_token_ids = [[word_to_id[token] for token in x] for x in x_train]
 count = np.zeros(id_to_word.shape)
