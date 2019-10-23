@@ -47,7 +47,7 @@ y_test[0:12500] = 1
 
 vocab_size += 1
 
-model = RNN_model(vocab_size,200)
+model = RNN_model(vocab_size,140)
 model.cuda()
 
 # opt = 'sgd'
