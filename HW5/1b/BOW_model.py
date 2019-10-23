@@ -10,7 +10,7 @@ class BOW_model(nn.Module):
     def __init__(self, no_of_hidden_units):
         super(BOW_model, self).__init__()
 
-        self.fc_hidden1 = nn.Linear(300,no_of_hidden_units)
+        self.fc_hidden1 = nn.Linear(no_of_hidden_units,no_of_hidden_units)
         self.bn_hidden1 = nn.BatchNorm1d(no_of_hidden_units)
         self.dropout1 = torch.nn.Dropout(p=0.5)
 
