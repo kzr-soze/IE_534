@@ -70,7 +70,7 @@ train_loss = []
 train_accu = []
 test_accu = []
 
-batch_size = 128
+batch_size = 200
 no_of_epochs = 8
 
 for epoch in range(no_of_epochs):
@@ -145,8 +145,9 @@ for epoch in range(no_of_epochs):
 
             x_input2 = [x_test[j] for j in I_permutation[i:i+batch_size]]
             sequence_length = 100
-            x_input = np.zeros((batch_size,sequence_length),dtype=np.int)
-            for j in range(batch_size):
+            ln = len(x_input2)
+            x_input = np.zeros((ln,sequence_length),dtype=np.int)
+            for j in range(ln):
                 x = np.asarray(x_input2[j])
                 sl = x.shape[0]
                 if(sl < sequence_length):
@@ -154,7 +155,7 @@ for epoch in range(no_of_epochs):
                 else:
                     start_index = np.random.randint(sl-sequence_length+1)
                     x_input[j,:] = x[start_index:(start_index+sequence_length)]
-            y_input = y_test[I_permutation[i:i+batch_size]]
+            y_input = y_test[I_permutation[i:i+ln]]
 
             data = Variable(torch.LongTensor(x_input)).cuda()
             target = Variable(torch.FloatTensor(y_input)).cuda()
