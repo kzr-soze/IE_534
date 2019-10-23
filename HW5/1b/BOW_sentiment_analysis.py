@@ -70,7 +70,7 @@ if(opt=='adam'):
 elif(opt=='sgd'):
     optimizer = optim.SGD(model.parameters(), lr=LR, momentum=0.9)
 
-batch_size = 200
+batch_size = 7500
 no_of_epochs = 6
 L_Y_train = len(y_train)
 L_Y_test = len(y_test)
