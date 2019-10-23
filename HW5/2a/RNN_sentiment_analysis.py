@@ -93,7 +93,9 @@ for epoch in range(no_of_epochs):
         sequence_length = 100
         x_input = np.zeros((batch_size,sequence_length),dtype=np.int)
         for j in range(batch_size):
+            print(len(batch_size))
             x = np.asarray(x_input2[j])
+
             sl = x.shape[0]
             if(sl < sequence_length):
                 x_input[j,0:sl] = x
