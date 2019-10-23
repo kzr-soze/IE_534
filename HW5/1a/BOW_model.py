@@ -14,7 +14,7 @@ class BOW_model(nn.Module):
 
         self.fc_hidden = nn.Linear(no_of_hidden_units,no_of_hidden_units)
         self.bn_hidden = nn.BatchNorm1d(no_of_hidden_units)
-        # self.dropout = torch.nn.Dropout(p=0.5)
+        self.dropout = torch.nn.Dropout(p=0.5)
 
         self.fc_output = nn.Linear(no_of_hidden_units, 1)
 
@@ -30,7 +30,9 @@ class BOW_model(nn.Module):
             bow_embedding.append(embed)
         bow_embedding = torch.stack(bow_embedding)
 
-        h = self.dropout(F.relu(self.bn_hidden(self.fc_hidden(bow_embedding))))
+        # h = self.dropout(F.relu(self.bn_hidden(self.fc_hidden(bow_embedding))))
+        h = F.relu(self.bn_hidden(self.fc_hidden(bow_embedding)))
+
         h = self.fc_output(h)
 
         return self.loss(h[:,0],t), h[:,0]
