@@ -102,6 +102,7 @@ for epoch in range(no_of_epochs):
         x_input = [x_train[j] for j in I_permutation[i:i+batch_size]]
         y_input = np.asarray([y_train[j] for j in I_permutation[i:i+batch_size]],dtype=np.int)
         target = Variable(torch.FloatTensor(y_input)).cuda()
+        x_input = Variable(torch.FloatTensor(x_input)).cuda()
 
         optimizer.zero_grad()
         loss, pred = model(x_input,target)
@@ -141,6 +142,7 @@ for epoch in range(no_of_epochs):
         x_input = [x_test[j] for j in I_permutation[i:i+batch_size]]
         y_input = np.asarray([y_test[j] for j in I_permutation[i:i+batch_size]],dtype=np.int)
         target = Variable(torch.FloatTensor(y_input)).cuda()
+        x_input = Variable(torch.FloatTensor(x_input)).cuda()
 
         # with torch.no_grad():
         loss, pred = model(x_input,target)
