@@ -102,6 +102,7 @@ for epoch in range(no_of_epochs):
             else:
                 start_index = np.random.randint(sl-sequence_length+1)
                 x_input[j,:] = x[start_index:(start_index+sequence_length)]
+        print (len(x_input2))
         y_input = y_train[I_permutation[i:i+len(x_input2)]]
 
         data = Variable(torch.LongTensor(x_input)).cuda()
