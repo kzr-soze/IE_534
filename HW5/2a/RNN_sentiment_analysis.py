@@ -92,7 +92,7 @@ for epoch in range(no_of_epochs):
 
         x_input2 = [x_train[j] for j in I_permutation[i:i+batch_size]]
         sequence_length = 100
-        x_input = np.zeros((batch_size,sequence_length),dtype=np.int)
+        x_input = np.zeros((len(x_input2),sequence_length),dtype=np.int)
         for j in range(len(x_input2)):
             x = np.asarray(x_input2[j])
 
@@ -102,13 +102,11 @@ for epoch in range(no_of_epochs):
             else:
                 start_index = np.random.randint(sl-sequence_length+1)
                 x_input[j,:] = x[start_index:(start_index+sequence_length)]
-        print (len(x_input2))
         y_input = y_train[I_permutation[i:i+len(x_input2)]]
-        print(len(y_input))
         data = Variable(torch.LongTensor(x_input)).cuda()
         target = Variable(torch.FloatTensor(y_input)).cuda()
-        print(len(data))
-        print(len(target))
+        # print(len(data))
+        # print(len(target))
         optimizer.zero_grad()
         loss, pred = model(data,target,train=True)
         loss.backward()
