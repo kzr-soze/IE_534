@@ -109,7 +109,7 @@ for epoch in range(no_of_epochs):
         x_input = glove_embeddings[x_input]
         y_input = y_test[I_permutation[i:i+ln]]
 
-        data = Variable(torch.LongTensor(x_input)).cuda()
+        data = Variable(torch.FloatTensor(x_input)).cuda()
         target = Variable(torch.FloatTensor(y_input)).cuda()
 
         # with torch.no_grad():
