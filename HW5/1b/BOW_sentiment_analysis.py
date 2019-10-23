@@ -56,7 +56,7 @@ y_test[0:12500] = 1
 
 vocab_size += 1
 
-no_of_hidden_units = 500
+no_of_hidden_units = 7500
 model = BOW_model(no_of_hidden_units) # try 300 as well
 
 model.cuda()
@@ -70,7 +70,7 @@ if(opt=='adam'):
 elif(opt=='sgd'):
     optimizer = optim.SGD(model.parameters(), lr=LR, momentum=0.9)
 
-batch_size = 7500
+batch_size = 200
 no_of_epochs = 6
 L_Y_train = len(y_train)
 L_Y_test = len(y_test)

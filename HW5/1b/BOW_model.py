@@ -26,8 +26,8 @@ class BOW_model(nn.Module):
 
         # h = self.fc_hidden1(x)
         # h = self.bn_hidden1(self.fc_hidden1(x))
-        # h = self.dropout1(F.relu(self.bn_hidden1(self.fc_hidden1(x))))
-        h = F.relu(self.bn_hidden1(self.fc_hidden1(x)))
+        h = self.dropout1(F.relu(self.bn_hidden1(self.fc_hidden1(x))))
+        # h = F.relu(self.bn_hidden1(self.fc_hidden1(x)))
         # h = self.dropout2(F.relu(self.bn_hidden2(self.fc_hidden2(h))))
         h = self.fc_output(h)
 
