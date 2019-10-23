@@ -90,6 +90,15 @@ print(hist)
 for i in range(10):
     print(id_to_word[i],count[i])
 
+## recreate word_to_id based on sorted list
+word_to_id = {token: idx for idx, token in enumerate(id_to_word)}
+
+## assign -1 if token doesn't appear in our dictionary
+## add +1 to all token ids, we went to reserve id=0 for an unknown token
+x_train_token_ids = [[word_to_id.get(token,-1)+1 for token in x] for x in x_train]
+x_test_token_ids = [[word_to_id.get(token,-1)+1 for token in x] for x in x_test]
+
+
 ## save dictionary
 np.save('preprocessed_data/imdb_dictionary.npy',np.asarray(id_to_word))
 
