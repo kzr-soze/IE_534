@@ -71,7 +71,7 @@ train_accu = []
 test_accu = []
 
 batch_size = 200
-no_of_epochs = 8
+no_of_epochs = 20
 
 for epoch in range(no_of_epochs):
 
@@ -86,8 +86,8 @@ for epoch in range(no_of_epochs):
     time1 = time.time()
 
     I_permutation = np.random.permutation(L_Y_train)
-    print(len(x_train))
-    print(len(y_train))
+    # print(len(x_train))
+    # print(len(y_train))
     for i in range(0, L_Y_train, batch_size):
 
         x_input2 = [x_train[j] for j in I_permutation[i:i+batch_size]]
