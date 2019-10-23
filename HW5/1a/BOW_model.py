@@ -14,14 +14,14 @@ class BOW_model(nn.Module):
 
         self.fc_hidden = nn.Linear(no_of_hidden_units,no_of_hidden_units)
         self.bn_hidden = nn.BatchNorm1d(no_of_hidden_units)
-        self.dropout = torch.nn.Dropout(p=0.5)
+        # self.dropout = torch.nn.Dropout(p=0.5)
 
         self.fc_output = nn.Linear(no_of_hidden_units, 1)
 
         self.loss = nn.BCEWithLogitsLoss()
 
     def forward(self, x, t):
-    
+
         bow_embedding = []
         for i in range(len(x)):
             lookup_tensor = Variable(torch.LongTensor(x[i])).cuda()

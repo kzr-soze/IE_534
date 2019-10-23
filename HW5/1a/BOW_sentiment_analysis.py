@@ -47,7 +47,7 @@ y_test[0:12500] = 1
 
 vocab_size += 1
 
-model = BOW_model(vocab_size,500)
+model = BOW_model(vocab_size,2500)
 model.cuda()
 
 # opt = 'sgd'
@@ -71,7 +71,7 @@ train_accu = []
 test_accu = []
 
 batch_size = 128
-no_of_epochs = 8
+no_of_epochs = 6
 
 for epoch in range(no_of_epochs):
 
