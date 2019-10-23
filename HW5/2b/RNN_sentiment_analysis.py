@@ -48,7 +48,7 @@ y_test[0:12500] = 1
 
 vocab_size += 1
 
-model = RNN_model(2000)
+model = RNN_model(20)
 model.cuda()
 
 # opt = 'sgd'
@@ -61,7 +61,7 @@ elif(opt=='sgd'):
     optimizer = optim.SGD(model.parameters(), lr=LR, momentum=0.9)
 
 batch_size = 200
-no_of_epochs = 20
+no_of_epochs = 10
 L_Y_train = len(y_train)
 L_Y_test = len(y_test)
 
