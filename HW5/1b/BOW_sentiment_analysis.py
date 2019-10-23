@@ -113,7 +113,7 @@ for epoch in range(no_of_epochs):
         truth = target >= 0.5
         acc = prediction.eq(truth).sum().cpu().data.numpy()
         epoch_acc += acc
-        epoch_loss += loss.data.item()
+        epoch_loss += loss.item()
         epoch_counter += batch_size
 
     epoch_acc /= epoch_counter
