@@ -50,17 +50,15 @@ vocab_size += 1
 model = RNN_model(vocab_size,100)
 model.cuda()
 
-# opt = 'sgd'
-# LR = 0.01
-opt = 'adam'
-LR = 0.001
+opt = 'sgd'
+LR = 0.01
+# opt = 'adam'
+# LR = 0.001
 if(opt=='adam'):
     optimizer = optim.Adam(model.parameters(), lr=LR)
 elif(opt=='sgd'):
     optimizer = optim.SGD(model.parameters(), lr=LR, momentum=0.9)
 
-batch_size = 200
-no_of_epochs = 6
 L_Y_train = len(y_train)
 L_Y_test = len(y_test)
 
@@ -71,7 +69,7 @@ train_accu = []
 test_accu = []
 
 batch_size = 200
-no_of_epochs = 20
+no_of_epochs = 30
 
 for epoch in range(no_of_epochs):
 
