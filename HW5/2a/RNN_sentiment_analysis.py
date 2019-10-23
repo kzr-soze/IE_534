@@ -104,10 +104,11 @@ for epoch in range(no_of_epochs):
                 x_input[j,:] = x[start_index:(start_index+sequence_length)]
         print (len(x_input2))
         y_input = y_train[I_permutation[i:i+len(x_input2)]]
-
+        print(len(y_input))
         data = Variable(torch.LongTensor(x_input)).cuda()
         target = Variable(torch.FloatTensor(y_input)).cuda()
-
+        print(len(data))
+        print(len(target))
         optimizer.zero_grad()
         loss, pred = model(data,target,train=True)
         loss.backward()
