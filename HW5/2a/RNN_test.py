@@ -70,7 +70,7 @@ train_loss = []
 train_accu = []
 test_accu = []
 
-batch_size = 128
+batch_size = 200
 no_of_epochs = 8
 
 print(['sequence length ','test accuracy ','test loss ','elapsed time '])
