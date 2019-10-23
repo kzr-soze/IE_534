@@ -132,8 +132,8 @@ for epoch in range(no_of_epochs):
         y_input = np.asarray([y_test[j] for j in I_permutation[i:i+batch_size]],dtype=np.int)
         target = Variable(torch.FloatTensor(y_input)).cuda()
 
-        with torch.no_grad():
-            loss, pred = model(x_input,target)
+        # with torch.no_grad():
+        loss, pred = model(x_input,target)
 
         prediction = pred >= 0.0
         truth = target >= 0.5
