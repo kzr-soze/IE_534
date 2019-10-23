@@ -86,7 +86,8 @@ for epoch in range(no_of_epochs):
     time1 = time.time()
 
     I_permutation = np.random.permutation(L_Y_train)
-
+    print(len(x_train))
+    print(len(y_train))
     for i in range(0, L_Y_train, batch_size):
 
         x_input2 = [x_train[j] for j in I_permutation[i:i+batch_size]]
@@ -101,7 +102,7 @@ for epoch in range(no_of_epochs):
             else:
                 start_index = np.random.randint(sl-sequence_length+1)
                 x_input[j,:] = x[start_index:(start_index+sequence_length)]
-        y_input = y_train[I_permutation[i:i+batch_size]]
+        y_input = y_train[I_permutation[i:i+len(x_input2)]]
 
         data = Variable(torch.LongTensor(x_input)).cuda()
         target = Variable(torch.FloatTensor(y_input)).cuda()
