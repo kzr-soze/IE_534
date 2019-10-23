@@ -108,7 +108,7 @@ filenames = pos_filenames + neg_filenames + unsup_filenames
 #         for token in tokens:
 #             f.write("%i " % token)
 #         f.write("\n")
-# 
+#
 # ## save test data to single text file
 # with io.open('preprocessed_data/imdb_test.txt','w',encoding='utf-8') as f:
 #     for tokens in x_test_token_ids:
@@ -138,7 +138,7 @@ glove_embeddings = np.asarray(glove_embeddings)
 # added a vector of zeros for the unknown tokens
 glove_embeddings = np.concatenate((np.zeros((1,300)),glove_embeddings))
 
-word_to_id = {token: idx for idx, token in enumerate(glove_dictionary)}
+word_to_id = dict([(token, idx) for idx, token in enumerate(glove_dictionary)])
 
 x_train_token_ids = [[word_to_id.get(token,-1)+1 for token in x] for x in x_train]
 x_test_token_ids = [[word_to_id.get(token,-1)+1 for token in x] for x in x_test]
