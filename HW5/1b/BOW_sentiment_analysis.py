@@ -56,7 +56,7 @@ y_test[0:12500] = 1
 
 vocab_size += 1
 
-no_of_hidden_units = 7500
+no_of_hidden_units = 50
 model = BOW_model(no_of_hidden_units) # try 300 as well
 
 model.cuda()
