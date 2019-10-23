@@ -61,7 +61,7 @@ elif(opt=='sgd'):
     optimizer = optim.SGD(model.parameters(), lr=LR, momentum=0.9)
 
 batch_size = 200
-no_of_epochs = 6
+no_of_epochs = 10
 # L_Y_train = len(y_train)
 L_Y_test = len(y_test)
 
