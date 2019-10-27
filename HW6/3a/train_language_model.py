@@ -112,7 +112,7 @@ for epoch in range(0,75):
         prediction = prediction.cpu().data.numpy()
         accuracy = float(np.sum(prediction==x_input.cpu().data.numpy()[:,1:]))/sequence_length
         epoch_acc += accuracy
-        epoch_loss += loss.data.item()
+        epoch_loss += loss.data[0]
         epoch_counter += batch_size
 
         if (i+batch_size) % 1000 == 0 and epoch==0:
