@@ -104,7 +104,7 @@ for epoch in range(0,75):
         loss, pred = model(x_input)
         loss.backward()
 
-        norm = nn.utils.clip_grad_norm_(model.parameters(),2.0)
+        norm = nn.utils.clip_grad_norm(model.parameters(),2.0)
 
         optimizer.step()   # update gradients
 
