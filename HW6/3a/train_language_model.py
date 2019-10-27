@@ -152,8 +152,8 @@ for epoch in range(0,75):
                     x_input[j,:] = x[start_index:(start_index+sequence_length)]
             x_input = Variable(torch.LongTensor(x_input)).cuda()
 
-            with torch.no_grad():
-                pred = model(x_input,train=False)
+            # with torch.no_grad():
+            #     pred = model(x_input,train=False)
 
             values,prediction = torch.max(pred,1)
             prediction = prediction.cpu().data.numpy()
