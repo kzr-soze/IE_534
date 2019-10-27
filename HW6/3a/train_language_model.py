@@ -116,7 +116,7 @@ for epoch in range(0,75):
         epoch_counter += batch_size
 
         if (i+batch_size) % 1000 == 0 and epoch==0:
-           print(i+batch_size, accuracy/batch_size, loss.data.item(), norm, "%.4f" % float(time.time()-time1))
+           print(i+batch_size, accuracy/batch_size, loss.data.item[0], norm, "%.4f" % float(time.time()-time1))
     epoch_acc /= epoch_counter
     epoch_loss /= (epoch_counter/batch_size)
 
@@ -159,7 +159,7 @@ for epoch in range(0,75):
             prediction = prediction.cpu().data.numpy()
             accuracy = float(np.sum(prediction==x_input.cpu().data.numpy()[:,1:]))/sequence_length
             epoch_acc += accuracy
-            epoch_loss += loss.data.item()
+            epoch_loss += loss.data[0]
             epoch_counter += batch_size
             #train_accu.append(accuracy)
             if (i+batch_size) % 1000 == 0 and epoch==0:
