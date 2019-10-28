@@ -48,7 +48,7 @@ y_test[0:12500] = 1
 
 vocab_size += 1
 
-model = RNN_model(vocab_size,100)
+model = RNN_model(vocab_size,500)
 
 language_model = torch.load('language.model')
 model.embedding.load_state_dict(language_model.embedding.state_dict())
@@ -78,10 +78,10 @@ for param in model.bn_lstm3.parameters():
 for param in model.fc_output.parameters():
     params.append(param)
 
-# opt = 'sgd'
-# LR = 0.01
-opt = 'adam'
-LR = 0.001
+opt = 'sgd'
+LR = 0.01
+# opt = 'adam'
+# LR = 0.001
 if(opt=='adam'):
     optimizer = optim.Adam(params, lr=LR)
 elif(opt=='sgd'):
