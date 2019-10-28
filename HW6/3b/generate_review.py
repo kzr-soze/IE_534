@@ -32,7 +32,7 @@ model.eval()
 ## to be the same length if doing more than one
 # tokens = [['i','love','this','movie','.'],['i','hate','this','movie','.']]
 # tokens = [['a'],['i']]
-tokens = [['This','movie','was','the']]
+tokens = [['this','movie','was','the'],['this','movie','was','the']]
 
 token_ids = np.asarray([[word_to_id.get(token,-1)+1 for token in x] for x in tokens])
 
