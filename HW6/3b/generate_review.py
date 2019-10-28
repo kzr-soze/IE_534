@@ -30,8 +30,8 @@ model.eval()
 ## create partial sentences to "prime" the model
 ## this implementation requires the partial sentences
 ## to be the same length if doing more than one
-# tokens = [['i','love','this','movie','.'],['i','hate','this','movie','.']]
-tokens = [['a'],['i']]
+tokens = [['i','love','this','movie','.'],['i','hate','this','movie','.']]
+# tokens = [['a'],['i']]
 
 token_ids = np.asarray([[word_to_id.get(token,-1)+1 for token in x] for x in tokens])
 
@@ -68,7 +68,7 @@ outputs = torch.stack(outputs)
 outputs = outputs.permute(1,2,0)
 output = outputs[:,:,-1]
 
-temperature = 1.0 # float(sys.argv[1])
+temperature = 1.5 # float(sys.argv[1])
 length_of_review = 150
 
 review = []

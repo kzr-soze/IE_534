@@ -135,6 +135,14 @@ for epoch in range(no_of_epochs):
         optimizer.zero_grad()
         loss, pred = model(data,target,train=True)
         loss.backward()
+        if epoch > 6:
+            for group in optimizer.param_groups:
+                for p in group['params']:
+                    state = optimizer.state[p]
+                    if 'step' in state.keys():
+                        if state['step'] >= 1024:
+                            state['step'] = 1000
+        optimizer.step()
 
         optimizer.step()   # update weights
 

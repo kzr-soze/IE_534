@@ -103,6 +103,14 @@ for epoch in range(0,75):
         optimizer.zero_grad()
         loss, pred = model(x_input)
         loss.backward()
+        if epoch > 6:
+            for group in optimizer.param_groups:
+                for p in group['params']:
+                    state = optimizer.state[p]
+                    if 'step' in state.keys():
+                        if state['step'] >= 1024:
+                            state['step'] = 1000
+        optimizer.step()
 
         norm = nn.utils.clip_grad_norm(model.parameters(),2.0)
 
