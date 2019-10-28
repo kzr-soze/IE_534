@@ -49,7 +49,7 @@ class LockedDropout(nn.Module):
 
         return mask * x
 
-class RNN_language_model(nn.Module):
+class RNN_model(nn.Module):
     def __init__(self,vocab_size,no_of_hidden_units):
         super(RNN_model, self).__init__()
 
