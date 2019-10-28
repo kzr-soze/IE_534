@@ -59,7 +59,7 @@ for i in range(no_of_timesteps):
 
     h = model.lstm3(h)
     h = model.bn_lstm3(h)
-    h = model.dropout3(h,dropout=0.3,train=False)gi
+    h = model.dropout3(h,dropout=0.3,train=False)
 
     h = model.decoder(h)
 
