@@ -12,6 +12,7 @@ import sys
 import io
 
 from RNN_model import RNN_model
+from RNN_language_model import RNN_language_model
 
 #imdb_dictionary = np.load('../preprocessed_data/imdb_dictionary.npy')
 vocab_size = 8000
@@ -107,7 +108,7 @@ for epoch in range(no_of_epochs):
                 x_input[j,:] = x[start_index:(start_index+sequence_length)]
         y_input = y_test[I_permutation[i:i+ln]]
 
-        data = Variable(torch.FloatTensor(x_input)).cuda()
+        data = Variable(torch.LongTensor(x_input)).cuda()
         target = Variable(torch.FloatTensor(y_input)).cuda()
 
         # with torch.no_grad():
