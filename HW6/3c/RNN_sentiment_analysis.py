@@ -136,7 +136,7 @@ for epoch in range(no_of_epochs):
         optimizer.zero_grad()
         loss, pred = model(data,target,train=True)
         loss.backward()
-        if epoch > 6:
+        if epoch > 0:
             for group in optimizer.param_groups:
                 for p in group['params']:
                     state = optimizer.state[p]
