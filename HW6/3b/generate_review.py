@@ -30,8 +30,9 @@ model.eval()
 ## create partial sentences to "prime" the model
 ## this implementation requires the partial sentences
 ## to be the same length if doing more than one
-tokens = [['i','love','this','movie','.'],['i','hate','this','movie','.']]
+# tokens = [['i','love','this','movie','.'],['i','hate','this','movie','.']]
 # tokens = [['a'],['i']]
+tokens = [['This','movie','was','the']]
 
 token_ids = np.asarray([[word_to_id.get(token,-1)+1 for token in x] for x in tokens])
 
@@ -58,7 +59,7 @@ for i in range(no_of_timesteps):
 
     h = model.lstm3(h)
     h = model.bn_lstm3(h)
-    h = model.dropout3(h,dropout=0.3,train=False)
+    h = model.dropout3(h,dropout=0.3,train=False)gi
 
     h = model.decoder(h)
 
@@ -68,7 +69,7 @@ outputs = torch.stack(outputs)
 outputs = outputs.permute(1,2,0)
 output = outputs[:,:,-1]
 
-temperature = 1.5 # float(sys.argv[1])
+temperature = 0.5 # float(sys.argv[1])
 length_of_review = 150
 
 review = []
