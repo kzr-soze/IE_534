@@ -102,7 +102,7 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
         epoch_counter += batch_size
         epoch_loss +=loss.data[0]
         _,predicted = torch.max(output.data,1)
-        acc += (predicted == Y_train_batch)
+        epoch_acc += (predicted == Y_train_batch)
 
     epoch_acc /= epoch_counter
     epoch_loss /= (epoch_counter/batch_size)
@@ -148,7 +148,7 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
             epoch_counter += batch_size
             epoch_loss +=loss.data[0]
             _,predicted = torch.max(output.data,1)
-            acc += (predicted == Y_test_batch)
+            epoch_acc += (predicted == Y_test_batch)
 
     epoch_acc /= epoch_counter
     epoch_loss /= (epoch_counter/batch_size)
