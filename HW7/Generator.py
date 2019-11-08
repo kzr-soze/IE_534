@@ -28,7 +28,13 @@ class Generator(nn.Module):
         self.conv8 = nn.Conv2d(196,3,3,padding=1)
 
     def forward(self,x):
-        x = F.relu(self.bn0(self.fc1(x)))
+        print(x.size())
+        x = self.fc1(x)
+        print(x.size())
+        x = self.bn0(x)
+        print(x.size())
+        x = F.relu(x)
+        # x = F.relu(self.bn0(self.fc1(x)))
         x = F.relu(self.bn1(self.conv1(x)))
         x = F.relu(self.bn2(self.conv2(x)))
         x = F.relu(self.bn3(self.conv3(x)))
