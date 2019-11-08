@@ -9,6 +9,32 @@ import numpy as np
 from torch.autograd import Variable
 
 from Discriminator import Discriminator
+from Generator import Generator
+
+def calc_gradient_penalty(netD, real_data, fake_data):
+    DIM = 32
+    LAMBDA = 10
+    alpha = torch.rand(batch_size, 1)
+    alpha = alpha.expand(batch_size, int(real_data.nelement()/batch_size)).contiguous()
+    alpha = alpha.view(batch_size, 3, DIM, DIM)
+    alpha = alpha.cuda()
+
+    fake_data = fake_data.view(batch_size, 3, DIM, DIM)
+    interpolates = alpha * real_data.detach() + ((1 - alpha) * fake_data.detach())
+
+    interpolates = interpolates.cuda()
+    interpolates.requires_grad_(True)
+
+    disc_interpolates, _ = netD(interpolates)
+
+    gradients = autograd.grad(outputs=disc_interpolates, inputs=interpolates,
+                              grad_outputs=torch.ones(disc_interpolates.size()).cuda(),
+                              create_graph=True, retain_graph=True, only_inputs=True)[0]
+
+    gradients = gradients.view(gradients.size(0), -1)
+    gradient_penalty = ((gradients.norm(2, dim=1) - 1) ** 2).mean() * LAMBDA
+    return gradient_penalty
+
 
 batch_size = 128
 transform_train = transforms.Compose([
@@ -38,15 +64,29 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-model = Discriminator()
+# model = Discriminator()
+#
+# model.cuda()
+# criterion = nn.CrossEntropyLoss()
+# optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
 
-model.cuda()
+aD =  Discriminator()
+aD.cuda()
+
+aG = Generator()
+aG.cuda()
+
+optimizer_g = torch.optim.Adam(aG.parameters(), lr=0.0001, betas=(0,0.9))
+optimizer_d = torch.optim.Adam(aD.parameters(), lr=0.0001, betas=(0,0.9))
+
 criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
+
+n_z = 100
+
 
 # Begin training
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+# criterion = nn.CrossEntropyLoss()
+# optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
 total_epochs = 100
 
