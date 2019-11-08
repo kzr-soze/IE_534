@@ -104,6 +104,7 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
         _,predicted = torch.max(output.data,1)
         epoch_acc += (predicted == Y_train_batch)
 
+    print(epoch_counter,epoch_acc)
     epoch_acc /= epoch_counter
     epoch_loss /= (epoch_counter/batch_size)
 
