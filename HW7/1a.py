@@ -26,7 +26,7 @@ transform_test = transforms.Compose([
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
 ])
 
-trainset = torchvision.datasets.CIFAR10(root='./', train=True, download=False, transform=transform_train)
+trainset = torchvision.datasets.CIFAR10(root='./', train=True, download=True, transform=transform_train)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=8)
 
 testset = torchvision.datasets.CIFAR10(root='./', train=False, download=False, transform=transform_test)
@@ -50,6 +50,8 @@ total_epochs = 100
 train_loss = []
 train_accu = []
 test_accu = []
+
+print("Beginning Training...")
 
 for epoch in range(total_epochs):  # loop over the dataset multiple times
     if(epoch==50):

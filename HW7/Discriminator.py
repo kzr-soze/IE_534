@@ -8,7 +8,7 @@ import torch.distributed as dist
 
 class Discriminator(nn.Module):
     def __init__(self):
-        super(self).__init__()
+        super(Discriminator,self).__init__()
         self.conv1 = nn.Conv2d(3,196,3,padding=1)
         self.ln1 = nn.LayerNorm([32,32])
         self.conv2 = nn.Conv2d(196,196,3,padding=1,stride=2)
