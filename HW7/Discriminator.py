@@ -46,6 +46,8 @@ class Discriminator(nn.Module):
         print(x.size())
         x = self.pool(x)
         print(x.size())
+        x = x.view(-1,196)
+        print(x.size())
         x1 = self.fc1(x)
         x2 = self.fc10(x)
         return [x1,x2]
