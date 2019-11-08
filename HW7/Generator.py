@@ -8,7 +8,7 @@ import torch.distributed as dist
 
 class Generator(nn.Module):
     def __init__(self):
-        super(Net,self).__init__()
+        super(self).__init__()
         self.fc1 = nn.Linear(100,196*4*4)
         self.bn0 = nn.BatchNorm2d(196)
         self.conv1 = nn.ConvTranspose2d(196,196,4,stride=2,padding=1)
