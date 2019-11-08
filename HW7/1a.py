@@ -114,7 +114,6 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
     print(epoch, "%.2f" % (epoch_acc*100.0), "%.4f" % epoch_loss, "%.4f" % float(time.time()-time1))
 
     # Begin testing accuracy
-    model.eval()
 
     epoch_acc = 0.0
     epoch_loss = 0.0
@@ -124,20 +123,22 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
     time1 = time.time()
 
     running_loss = 0.0
-    # with torch.no_grad():
-    for batch_idx, (X_test_batch, Y_test_batch) in enumerate(testloader):
+    model.eval()
+    with torch.no_grad():
+        for batch_idx, (X_test_batch, Y_test_batch) in enumerate(testloader):
 
-        if(Y_test_batch.shape[0] < batch_size):
-            continue
+            if(Y_test_batch.shape[0] < batch_size):
+                continue
 
-        X_test_batch = Variable(X_test_batch).cuda()
-        Y_test_batch = Variable(Y_test_batch).cuda()
-        _, output = model(X_test_batch)
+            X_test_batch = Variable(X_test_batch).cuda()
+            Y_test_batch = Variable(Y_test_batch).cuda()
+            with torch.no_grad():
+                _, output = model(X_test_batch )
 
-        epoch_counter += batch_size
-        epoch_loss +=loss.data[0]
-        _,predicted = torch.max(output.data,1)
-        epoch_acc += (predicted == Y_test_batch).sum().item()
+            epoch_counter += batch_size
+            epoch_loss +=loss.data[0]
+            _,predicted = torch.max(output.data,1)
+            epoch_acc += (predicted == Y_test_batch).sum().item()
 
     # print(epoch_counter,epoch_acc)
     epoch_acc /= epoch_counter
