@@ -26,8 +26,8 @@ class Discriminator(nn.Module):
         self.conv8 = nn.Conv2d(196,196,3,padding=1,stride=2)
         self.ln8 = nn.LayerNorm([4,4])
         self.pool = nn.MaxPool2d(4,stride=4)
-        self.fc1 = nn.Linear(input_size=196,output_size=1)
-        self.fc10 = nn.Linear(input_size=196,output_size=10)
+        self.fc1 = nn.Linear(in_features=196,out_features=1)
+        self.fc10 = nn.Linear(in_features=196,out_features=10)
 
     def forward(self,x):
         x = F.leaky_relu(self.ln1(self.conv1(x)))
