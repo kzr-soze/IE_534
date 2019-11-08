@@ -31,6 +31,7 @@ class Generator(nn.Module):
         print(x.size())
         x = self.fc1(x)
         print(x.size())
+        x = x.view(-1,196,4,4)
         x = self.bn0(x)
         print(x.size())
         x = F.relu(x)
