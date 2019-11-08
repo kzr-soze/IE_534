@@ -102,7 +102,7 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
         epoch_counter += batch_size
         epoch_loss +=loss.data[0]
         _,predicted = torch.max(output.data,1)
-        epoch_acc += (predicted == Y_train_batch).sum()
+        epoch_acc += (predicted == Y_train_batch).sum().item()
 
     print(epoch_counter,epoch_acc)
     epoch_acc /= epoch_counter
@@ -124,7 +124,7 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
     time1 = time.time()
 
     running_loss = 0.0
-    with torch.no_grad:
+    with torch.no_grad():
         for batch_idx, (X_test_batch, Y_test_batch) in enumerate(testloader):
 
             if(Y_test_batch.shape[0] < batch_size):
@@ -149,7 +149,7 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
             epoch_counter += batch_size
             epoch_loss +=loss.data[0]
             _,predicted = torch.max(output.data,1)
-            epoch_acc += (predicted == Y_test_batch)
+            epoch_acc += (predicted == Y_train_batch).sum().item()
 
     print(epoch_counter,epoch_acc)
     epoch_acc /= epoch_counter
