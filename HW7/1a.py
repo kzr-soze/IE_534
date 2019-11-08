@@ -149,7 +149,7 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
         epoch_counter += batch_size
         epoch_loss +=loss.data[0]
         _,predicted = torch.max(output.data,1)
-        epoch_acc += (predicted == Y_train_batch).sum().item()
+        epoch_acc += (predicted == Y_test_batch).sum().item()
 
     print(epoch_counter,epoch_acc)
     epoch_acc /= epoch_counter
