@@ -159,7 +159,7 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
     train_accu.append(epoch_acc)
 
     print(epoch, "%.2f" % (epoch_acc*100.0), "%.4f" % epoch_loss, "%.4f" % float(time.time()-time1))
-
+    torch.save(model,'prelim_cifar10.model')
 
 
 print('Finished Training')
