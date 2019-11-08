@@ -95,9 +95,9 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
 
         # print statistics
         running_loss += loss.item()
-        if i % 50 == 49:    # print every 50 mini-batches
+        if batch_idx % 50 == 49:    # print every 50 mini-batches
             print('[%d, %5d] loss: %.3f' %
-                  (epoch + 1, i + 1, running_loss / 2000))
+                  (epoch + 1, i + 1, running_loss / (50*batch_size)))
             running_loss = 0.0
         epoch_counter += batch_size
         epoch_loss +=loss.data[0]
