@@ -124,32 +124,32 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
     time1 = time.time()
 
     running_loss = 0.0
-    with torch.no_grad():
-        for batch_idx, (X_test_batch, Y_test_batch) in enumerate(testloader):
+    # with torch.no_grad():
+    for batch_idx, (X_test_batch, Y_test_batch) in enumerate(testloader):
 
-            if(Y_test_batch.shape[0] < batch_size):
-                continue
+        if(Y_test_batch.shape[0] < batch_size):
+            continue
 
-            X_test_batch = Variable(X_test_batch).cuda()
-            Y_test_batch = Variable(Y_test_batch).cuda()
-            _, output = model(X_test_batch)
+        X_test_batch = Variable(X_test_batch).cuda()
+        Y_test_batch = Variable(Y_test_batch).cuda()
+        _, output = model(X_test_batch)
 
-            loss = criterion(output, Y_test_batch)
-            optimizer.zero_grad()
+        loss = criterion(output, Y_test_batch)
+        optimizer.zero_grad()
 
-            loss.backward()
-            optimizer.step()
+        loss.backward()
+        optimizer.step()
 
-            # print statistics
-            running_loss += loss.item()
-            if batch_idx % 50 == 49:    # print every 50 mini-batches
-                print('[%d, %5d] loss: %.3f' %
-                      (epoch + 1, batch_idx + 1, running_loss / 50))
-                running_loss = 0.0
-            epoch_counter += batch_size
-            epoch_loss +=loss.data[0]
-            _,predicted = torch.max(output.data,1)
-            epoch_acc += (predicted == Y_train_batch).sum().item()
+        # print statistics
+        running_loss += loss.item()
+        if batch_idx % 50 == 49:    # print every 50 mini-batches
+            print('[%d, %5d] loss: %.3f' %
+                  (epoch + 1, batch_idx + 1, running_loss / 50))
+            running_loss = 0.0
+        epoch_counter += batch_size
+        epoch_loss +=loss.data[0]
+        _,predicted = torch.max(output.data,1)
+        epoch_acc += (predicted == Y_train_batch).sum().item()
 
     print(epoch_counter,epoch_acc)
     epoch_acc /= epoch_counter
