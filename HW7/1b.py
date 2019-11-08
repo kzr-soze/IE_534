@@ -84,12 +84,6 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-# model = Discriminator()
-#
-# model.cuda()
-# criterion = nn.CrossEntropyLoss()
-# optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
-
 aD =  Discriminator()
 aD.cuda()
 
@@ -102,11 +96,7 @@ optimizer_d = torch.optim.Adam(aD.parameters(), lr=0.0001, betas=(0,0.9))
 criterion = nn.CrossEntropyLoss()
 
 n_z = 100
-
-
-# Begin training
-# criterion = nn.CrossEntropyLoss()
-# optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+n_classes = 10
 
 total_epochs = 200
 gen_train = 1
@@ -243,28 +233,6 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
                                     "%.2f" % np.mean(loss4),
                                     "%.2f" % np.mean(loss5),
                                     "%.2f" % np.mean(acc1))
-
-        # print statistics
-        # running_loss += loss.item()
-        # if batch_idx % 50 == 49:    # print every 50 mini-batches
-        #     print('[%d, %5d] loss: %.3f' %
-        #           (epoch + 1, batch_idx + 1, running_loss / (50*batch_size)))
-        #     running_loss = 0.0
-        # epoch_counter += batch_size
-        # epoch_loss +=loss.data[0]
-        # _,predicted = torch.max(output.data,1)
-        # epoch_acc += (predicted == Y_train_batch).sum().item()
-
-    # print(epoch_counter,epoch_acc)
-    # epoch_acc /= epoch_counter
-    # epoch_loss /= (epoch_counter/batch_size)
-    #
-    # train_loss.append(epoch_loss)
-    # train_accu.append(epoch_acc)
-    #
-    # print(epoch, "%.2f" % (epoch_acc*100.0), "%.4f" % epoch_loss, "%.4f" % float(time.time()-time1))
-
-    # Begin testing accuracy
 
     # Test the model
     aD.eval()
