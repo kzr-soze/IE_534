@@ -48,6 +48,8 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
+learning_rate = 0.001 
+
 total_epochs = 100
 
 train_loss = []
