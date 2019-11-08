@@ -141,7 +141,7 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
     epoch_loss = 0.0
 
     epoch_counter = 0
-    time1 = time.time()
+    start_time = time.time()
 
     running_loss = 0.0
     for batch_idx, (X_train_batch, Y_train_batch) in enumerate(trainloader):
