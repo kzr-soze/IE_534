@@ -94,17 +94,17 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
         optimizer.step()
 
         # print statistics
-        running_loss += loss.item()
-        if batch_idx % 50 == 49:    # print every 50 mini-batches
-            print('[%d, %5d] loss: %.3f' %
-                  (epoch + 1, batch_idx + 1, running_loss / (50*batch_size)))
-            running_loss = 0.0
+        # running_loss += loss.item()
+        # if batch_idx % 50 == 49:    # print every 50 mini-batches
+        #     print('[%d, %5d] loss: %.3f' %
+        #           (epoch + 1, batch_idx + 1, running_loss / (50*batch_size)))
+        #     running_loss = 0.0
         epoch_counter += batch_size
         epoch_loss +=loss.data[0]
         _,predicted = torch.max(output.data,1)
         epoch_acc += (predicted == Y_train_batch).sum().item()
 
-    print(epoch_counter,epoch_acc)
+    # print(epoch_counter,epoch_acc)
     epoch_acc /= epoch_counter
     epoch_loss /= (epoch_counter/batch_size)
 
@@ -141,17 +141,17 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
         optimizer.step()
 
         # print statistics
-        running_loss += loss.item()
-        if batch_idx % 50 == 49:    # print every 50 mini-batches
-            print('[%d, %5d] loss: %.3f' %
-                  (epoch + 1, batch_idx + 1, running_loss / 50))
-            running_loss = 0.0
+        # running_loss += loss.item()
+        # if batch_idx % 50 == 49:    # print every 50 mini-batches
+        #     print('[%d, %5d] loss: %.3f' %
+        #           (epoch + 1, batch_idx + 1, running_loss / 50))
+        #     running_loss = 0.0
         epoch_counter += batch_size
         epoch_loss +=loss.data[0]
         _,predicted = torch.max(output.data,1)
         epoch_acc += (predicted == Y_test_batch).sum().item()
 
-    print(epoch_counter,epoch_acc)
+    # print(epoch_counter,epoch_acc)
     epoch_acc /= epoch_counter
     epoch_loss /= (epoch_counter/batch_size)
 
