@@ -174,6 +174,11 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
 
             gen_cost = -gen_source + gen_class
             gen_cost.backward()
+            for group in optimizer_g.param_groups:
+                for p in group['params']:
+                    state = optimizer_g.state[p]
+                    if('step' in state and state['step']>=1024):
+                        state['step'] = 1000
 
             optimizer_g.step()
 
@@ -217,6 +222,11 @@ for epoch in range(total_epochs):  # loop over the dataset multiple times
 
         disc_cost = disc_fake_source - disc_real_source + disc_real_class + disc_fake_class + gradient_penalty
         disc_cost.backward()
+        for group in optimizer_d.param_groups:
+            for p in group['params']:
+                state = optimizer_d.state[p]
+                if('step' in state and state['step']>=1024):
+                    state['step'] = 1000
 
         optimizer_d.step()
 
