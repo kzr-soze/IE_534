@@ -75,7 +75,7 @@ Y = Variable(Y).cuda()
 
 lr = 0.1
 weight_decay = 0.001
-for i in arange(200):
+for i in range(200):
     _, output = model(X)
 
     loss = -output[torch.arange(10).type(torch.int64),torch.arange(10).type(torch.int64)]
@@ -105,7 +105,7 @@ model = torch.load('discriminator.model')
 model.cuda()
 model.eval()
 
-for i in arange(200):
+for i in range(200):
     _, output = model(X)
 
     loss = -output[torch.arange(10).type(torch.int64),torch.arange(10).type(torch.int64)]
