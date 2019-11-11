@@ -141,3 +141,5 @@ samples = samples.transpose(0,2,3,1)
 fig = plot(samples[0:100])
 plt.savefig('visualization/jittered_images.png', bbox_inches='tight')
 plt.close(fig)
+
+print("Finished")
