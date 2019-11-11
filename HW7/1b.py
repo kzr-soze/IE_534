@@ -121,12 +121,12 @@ save_noise = Variable(save_noise).cuda()
 print("Beginning Training...")
 
 for epoch in range(total_epochs):  # loop over the dataset multiple times
-    if(epoch==50):
-        for param_group in optimizer.param_groups:
-            param_group['lr'] = learning_rate/10.0
-    if(epoch==75):
-        for param_group in optimizer.param_groups:
-            param_group['lr'] = learning_rate/100.0
+    # if(epoch==50):
+    #     for param_group in optimizer.param_groups:
+    #         param_group['lr'] = learning_rate/10.0
+    # if(epoch==75):
+    #     for param_group in optimizer.param_groups:
+    #         param_group['lr'] = learning_rate/100.0
 
     loss1 = []
     loss2 = []
