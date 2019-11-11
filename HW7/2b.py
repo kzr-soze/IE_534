@@ -101,7 +101,7 @@ fig = plot(samples)
 plt.savefig('visualization/max_classD.png', bbox_inches='tight')
 plt.close(fig)
 
-model = torch.load('discriminator.model')
+model = torch.load('tempD.model')
 model.cuda()
 model.eval()
 
