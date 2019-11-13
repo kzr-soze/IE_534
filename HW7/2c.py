@@ -73,7 +73,7 @@ model.cuda()
 model.eval()
 
 batch_idx, (X_batch, Y_batch) = testloader.__next__()
-# X_batch = Variable(X_batch,requires_grad=True).cuda()
+X_batch = Variable(X_batch,requires_grad=True).cuda()
 X = X_batch.mean(dim=0)
 X = X.repeat(batch_size,1,1,1)
 
