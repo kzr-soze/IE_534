@@ -32,7 +32,7 @@ def plot(samples):
         plt.imshow(sample)
     return fig
 
-batch_size = 128
+batch_size = 10
 
 transform_train = transforms.Compose([
     transforms.RandomResizedCrop(32, scale=(0.7, 1.0), ratio=(1.0,1.0)),
