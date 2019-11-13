@@ -32,7 +32,7 @@ def plot(samples):
         plt.imshow(sample)
     return fig
 
-batch_size = 10
+batch_size = 100
 
 transform_train = transforms.Compose([
     transforms.RandomResizedCrop(32, scale=(0.7, 1.0), ratio=(1.0,1.0)),
@@ -63,7 +63,7 @@ classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 dg = True
-if dg:
+if not dg:
     model = torch.load('discriminator.model')
     append = "_D"
 else:
@@ -73,7 +73,7 @@ model.cuda()
 model.eval()
 
 batch_idx, (X_batch, Y_batch) = testloader.__next__()
-X_batch = Variable(X_batch,requires_grad=True).cuda()
+# X_batch = Variable(X_batch,requires_grad=True).cuda()
 X = X_batch.mean(dim=0)
 X = X.repeat(batch_size,1,1,1)
 
