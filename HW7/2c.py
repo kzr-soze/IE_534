@@ -61,16 +61,21 @@ testloader = enumerate(testloader)
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-model = torch.load('cifar10.model')
+dg = True
+if dg:
+    model = torch.load('discriminator.model')
+    append = "D"
+else:
+    model = torch.load('cifar10.model')
+    append = "DG"
 model.cuda()
 model.eval()
 
 batch_idx, (X_batch, Y_batch) = testloader.__next__()
-X_batch = Variable(X_batch,requires_grad=True).cuda()
 X = X_batch.mean(dim=0)
-X = X.repeat(10,1,1,1)
+X = X.repeat(batch_size,1,1,1)
 
-Y = torch.arange(10).type(torch.int64)
+Y = torch.arange(batch_size).type(torch.int64)
 Y = Variable(Y).cuda()
 
 lr = 0.1
@@ -78,13 +83,13 @@ weight_decay = 0.001
 for i in xrange(200):
     _, output = model(X)
 
-    loss = -output[torch.arange(10).type(torch.int64),torch.arange(10).type(torch.int64)]
+    loss = -output[torch.arange(batch_size).type(torch.int64),torch.arange(batch_size).type(torch.int64)]
     gradients = torch.autograd.grad(outputs=loss, inputs=X,
                               grad_outputs=torch.ones(loss.size()).cuda(),
                               create_graph=True, retain_graph=False, only_inputs=True)[0]
 
     prediction = output.data.max(1)[1] # first column has actual prob.
-    accuracy = ( float( prediction.eq(Y.data).sum() ) /float(10.0))*100.0
+    accuracy = ( float( prediction.eq(Y.data).sum() ) /float(batch_size))*100.0
     print(i,accuracy,-loss)
 
     X = X - lr*gradients.data - weight_decay*X.data*torch.abs(X.data)
@@ -97,8 +102,8 @@ samples += 1.0
 samples /= 2.0
 samples = samples.transpose(0,2,3,1)
 
-fig = plot(samples)
-plt.savefig('visualization/max_classD.png', bbox_inches='tight')
+fig = plot(samples[0:100])
+plt.savefig('visualization/max_features.png', bbox_inches='tight')
 plt.close(fig)
 
 model = torch.load('discriminator.model')
@@ -128,5 +133,5 @@ samples /= 2.0
 samples = samples.transpose(0,2,3,1)
 
 fig = plot(samples)
-plt.savefig('visualization/max_classDG.png', bbox_inches='tight')
+plt.savefig('visualization/max_class'+append+'.png', bbox_inches='tight')
 plt.close(fig)

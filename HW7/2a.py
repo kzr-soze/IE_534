@@ -61,7 +61,13 @@ testloader = enumerate(testloader)
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-model = torch.load('cifar10.model')
+dg = True
+if dg:
+    model = torch.load('discriminator.model')
+    append = "D"
+else:
+    model = torch.load('cifar10.model')
+    append = "DG"
 model.cuda()
 model.eval()
 
@@ -114,7 +120,7 @@ samples /= 2.0
 samples = samples.transpose(0,2,3,1)
 
 fig = plot(samples[0:100])
-plt.savefig('visualization/jittered_images.png', bbox_inches='tight')
+plt.savefig('visualization/jittered_images'+append+'.png', bbox_inches='tight')
 plt.close(fig)
 
 print("Finished")

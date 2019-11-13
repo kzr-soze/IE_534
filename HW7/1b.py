@@ -287,3 +287,6 @@ print('Finished Training')
 
 torch.save(aG,'generator.model')
 torch.save(aD,'discriminator.model')
+
+# Test accuracy: 84.098%
+# Train accuracy: 93.57%
