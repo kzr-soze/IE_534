@@ -62,7 +62,7 @@ testloader = enumerate(testloader)
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-dg = True
+dg = False
 if not dg:
     model = torch.load('discriminator.model')
     append = "_D"
