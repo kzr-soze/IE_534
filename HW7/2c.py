@@ -63,12 +63,16 @@ classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 dg = False
+model = Discriminator()
+model.load_state_dict(torch.load(PATH))
 if dg:
-    model = torch.load('discriminator.model')
+    mod = torch.load('discriminator.model')
     append = "_D"
 else:
-    model = torch.load('cifar10.model')
+    mod = torch.load('cifar10.model')
     append = "_DG"
+torch.save(mod.state_dict(),'state_dict')
+model.load_state_dict(torch.load('state_dict'))
 model.cuda()
 model.eval()
 
