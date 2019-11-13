@@ -64,10 +64,10 @@ classes = ('plane', 'car', 'bird', 'cat',
 dg = False
 if dg:
     model = torch.load('discriminator.model')
-    append = "D"
+    append = "DG"
 else:
     model = torch.load('cifar10.model')
-    append = "DG"
+    append = "D"
 model.cuda()
 model.eval()
 

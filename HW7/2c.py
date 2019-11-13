@@ -66,10 +66,10 @@ dg = False
 model = Discriminator()
 if dg:
     mod = torch.load('discriminator.model')
-    append = "_D"
+    append = "_DG"
 else:
     mod = torch.load('cifar10.model')
-    append = "_DG"
+    append = "_D"
 torch.save(mod.state_dict(),'state_dict')
 model.load_state_dict(torch.load('state_dict'))
 model.cuda()

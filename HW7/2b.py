@@ -60,13 +60,13 @@ testloader = enumerate(testloader)
 
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
-dg = True
+dg = False
 if dg:
     model = torch.load('discriminator.model')
-    append = "_D"
+    append = "_DG"
 else:
     model = torch.load('cifar10.model')
-    append = "_DG"
+    append = "_D"
 model.cuda()
 model.eval()
 
