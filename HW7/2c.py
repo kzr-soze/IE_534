@@ -64,7 +64,6 @@ classes = ('plane', 'car', 'bird', 'cat',
 
 dg = False
 model = Discriminator()
-model.load_state_dict(torch.load(PATH))
 if dg:
     mod = torch.load('discriminator.model')
     append = "_D"
