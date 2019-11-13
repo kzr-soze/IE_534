@@ -63,7 +63,7 @@ classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 dg = False
-if not dg:
+if dg:
     model = torch.load('discriminator.model')
     append = "_D"
 else:
@@ -82,32 +82,33 @@ Y = Variable(Y).cuda()
 
 lr = 0.1
 weight_decay = 0.001
-for i in range(200):
-    _, output = model(X)
+for j in range(9):
+    for i in range(200):
+        _, output = model(X,extract_features=j)
 
-    # loss = -output[torch.arange(batch_size).type(torch.int64),torch.arange(batch_size).type(torch.int64)]
-    loss = -output.diag()
-    gradients = torch.autograd.grad(outputs=loss, inputs=X,
-                              grad_outputs=torch.ones(loss.size()).cuda(),
-                              create_graph=True, retain_graph=False, only_inputs=True)[0]
+        # loss = -output[torch.arange(batch_size).type(torch.int64),torch.arange(batch_size).type(torch.int64)]
+        loss = -output.diag()
+        gradients = torch.autograd.grad(outputs=loss, inputs=X,
+                                  grad_outputs=torch.ones(loss.size()).cuda(),
+                                  create_graph=True, retain_graph=False, only_inputs=True)[0]
 
-    prediction = output.data.max(1)[1] # first column has actual prob.
-    accuracy = ( float( prediction.eq(Y.data).sum() ) /float(batch_size))*100.0
-    print(i,accuracy,-loss)
+        prediction = output.data.max(1)[1] # first column has actual prob.
+        accuracy = ( float( prediction.eq(Y.data).sum() ) /float(batch_size))*100.0
+        print(i,accuracy,-loss)
 
-    X = X - lr*gradients.data - weight_decay*X.data*torch.abs(X.data)
-    X[X>1.0] = 1.0
-    X[X<-1.0] = -1.0
+        X = X - lr*gradients.data - weight_decay*X.data*torch.abs(X.data)
+        X[X>1.0] = 1.0
+        X[X<-1.0] = -1.0
 
-## save new images
-samples = X.data.cpu().numpy()
-samples += 1.0
-samples /= 2.0
-samples = samples.transpose(0,2,3,1)
+    ## save new images
+    samples = X.data.cpu().numpy()
+    samples += 1.0
+    samples /= 2.0
+    samples = samples.transpose(0,2,3,1)
 
-fig = plot(samples[0:100])
-plt.savefig('visualization/max_features'+append+'.png', bbox_inches='tight')
-plt.close(fig)
+    fig = plot(samples[0:100])
+    plt.savefig('visualization/max_features_layer'+j+''+append+'.png', bbox_inches='tight')
+    plt.close(fig)
 
 print("Finished")
 

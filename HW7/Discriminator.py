@@ -6,6 +6,8 @@ import torch.optim as optim
 from torch.autograd import Variable
 import torch.distributed as dist
 
+no_of_hidden_units=196
+
 class Discriminator(nn.Module):
     def __init__(self):
         super(Discriminator,self).__init__()
