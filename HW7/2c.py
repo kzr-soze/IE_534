@@ -82,9 +82,9 @@ Y = Variable(Y).cuda()
 
 lr = 0.1
 weight_decay = 0.001
-for j in range(9):
+for j in range(8):
     for i in range(200):
-        _, output = model(X,extract_features=j)
+        _, output = model(X,extract_features=j+1)
 
         # loss = -output[torch.arange(batch_size).type(torch.int64),torch.arange(batch_size).type(torch.int64)]
         loss = -output.diag()
@@ -107,7 +107,7 @@ for j in range(9):
     samples = samples.transpose(0,2,3,1)
 
     fig = plot(samples[0:100])
-    plt.savefig('visualization/max_features_layer'+j+''+append+'.png', bbox_inches='tight')
+    plt.savefig('visualization/max_features_layer'+str(j+1)+''+append+'.png', bbox_inches='tight')
     plt.close(fig)
 
 print("Finished")
