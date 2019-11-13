@@ -63,10 +63,10 @@ classes = ('plane', 'car', 'bird', 'cat',
 dg = True
 if dg:
     model = torch.load('discriminator.model')
-    append = "D"
+    append = "_D"
 else:
     model = torch.load('cifar10.model')
-    append = "DG"
+    append = "_DG"
 model.cuda()
 model.eval()
 
@@ -103,35 +103,7 @@ samples /= 2.0
 samples = samples.transpose(0,2,3,1)
 
 fig = plot(samples)
-plt.savefig('visualization/max_classD.png', bbox_inches='tight')
-plt.close(fig)
-
-model = torch.load('tempD.model')
-model.cuda()
-model.eval()
-
-for i in range(200):
-    _, output = model(X)
-
-    loss = -output[torch.arange(10).type(torch.int64),torch.arange(10).type(torch.int64)]
-    gradients = torch.autograd.grad(outputs=loss, inputs=X,
-                              grad_outputs=torch.ones(loss.size()).cuda(),
-                              create_graph=True, retain_graph=False, only_inputs=True)[0]
-
-    prediction = output.data.max(1)[1] # first column has actual prob.
-    accuracy = ( float( prediction.eq(Y.data).sum() ) /float(10.0))*100.0
-    print(i,accuracy,-loss)
-
-    X = X - lr*gradients.data - weight_decay*X.data*torch.abs(X.data)
-    X[X>1.0] = 1.0
-    X[X<-1.0] = -1.0
-
-## save new images
-samples = X.data.cpu().numpy()
-samples += 1.0
-samples /= 2.0
-samples = samples.transpose(0,2,3,1)
-
-fig = plot(samples)
 plt.savefig('visualization/max_class'+append+'.png', bbox_inches='tight')
 plt.close(fig)
+
+print("Finished")

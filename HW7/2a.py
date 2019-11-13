@@ -61,7 +61,7 @@ testloader = enumerate(testloader)
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-dg = True
+dg = False
 if dg:
     model = torch.load('discriminator.model')
     append = "D"
@@ -76,6 +76,16 @@ X_batch = Variable(X_batch,requires_grad=True).cuda()
 Y_batch_alternate = (Y_batch + 1)%10
 Y_batch_alternate = Variable(Y_batch_alternate).cuda()
 Y_batch = Variable(Y_batch).cuda()
+
+## save real images
+samples = X_batch.data.cpu().numpy()
+samples += 1.0
+samples /= 2.0
+samples = samples.transpose(0,2,3,1)
+
+fig = plot(samples[0:100])
+plt.savefig('visualization/real_images.png', bbox_inches='tight')
+plt.close(fig)
 
 _, output = model(X_batch)
 prediction = output.data.max(1)[1] # first column has actual prob.
@@ -120,7 +130,7 @@ samples /= 2.0
 samples = samples.transpose(0,2,3,1)
 
 fig = plot(samples[0:100])
-plt.savefig('visualization/jittered_images'+append+'.png', bbox_inches='tight')
+plt.savefig('visualization/jittered_images.png', bbox_inches='tight')
 plt.close(fig)
 
 print("Finished")
