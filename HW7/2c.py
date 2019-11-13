@@ -32,7 +32,6 @@ def plot(samples):
         plt.imshow(sample)
     return fig
 
-batch_size = 10
 transform_train = transforms.Compose([
     transforms.RandomResizedCrop(32, scale=(0.7, 1.0), ratio=(1.0,1.0)),
     transforms.ColorJitter(
@@ -71,7 +70,10 @@ else:
 model.cuda()
 model.eval()
 
+batch_size = 128
+
 batch_idx, (X_batch, Y_batch) = testloader.__next__()
+X_batch = Variable(X_batch,requires_grad=True).cuda()
 X = X_batch.mean(dim=0)
 X = X.repeat(batch_size,1,1,1)
 
