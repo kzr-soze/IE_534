@@ -47,8 +47,8 @@ class DQN:
 
         ### <<< Your Code Here
         # linearly anneal from 1 to 0.01 in eps_decay steps
-        eps = '???' + ('???' - '???') * self.num_act_steps / self.eps_decay
-        eps = max('???', eps)
+        eps = 1 + (0.01 - 1) * self.num_act_steps / self.eps_decay
+        eps = max(0.01, eps)
         ### Your Code Ends >>>
 
         return eps
@@ -98,13 +98,13 @@ class DQN:
         if self.double_q:
             # Hint: try using self.q_func(non_terminal_next_states).argmax(1)
             next_state_values[non_terminal_mask] = next_q_values[
-                torch.arange(len(next_q_values)), '???']
+                torch.arange(len(next_q_values)), self.q_func(non_terminal_next_states).argmax(1)]
         else:
             next_state_values[non_terminal_mask] = next_q_values.max(1)[0]
 
-        target_q_values = '???' * self.discount + '???'
+        target_q_values = next_state_values * self.discount + reward_batch
 
-        loss = '???'  # Hint: try using q_values, target_q_values
+        loss = 1/self.batch_size * sum((target_q_values - q_values)**2)  # Hint: try using q_values, target_q_values
         ### Your Code Ends >>>
 
         self.optimizer.zero_grad()
@@ -238,13 +238,13 @@ class ActorCritic:
 
         ### <<< Your Code Here
         # use 'advantage_detach', 'dist' and 'actions' to compute this; double-check the sign of your expression!
-        policy_loss = '???'
+        policy_loss = (advantage_detach * dist.log_prob(actions)).mean()
 
         # use the entropy function of 'dist' to compute this
-        entropy_loss = '???'
+        entropy_loss = dist.entropy().mean()
 
         # value loss is the squared loss on variable 'advantage'
-        value_loss = '???'
+        value_loss = (advantage**2).mean()
         ### Your Code Ends >>>
 
         loss = -policy_loss - self.entropy_coef * entropy_loss + self.value_coef * value_loss

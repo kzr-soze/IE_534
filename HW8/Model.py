@@ -7,13 +7,13 @@ class TwoLayerFCNet(nn.Module):
     def __init__(self, n_in=4, n_hidden=128, n_out=2):
         super().__init__()
         ### <<< Your Code Here
-        self.fc1 = nn.Linear('???', '???')
-        self.fc2 = '???'
+        self.fc1 = nn.Linear(n_in, n_hidden)
+        self.fc2 = nn.Linear(n_hidden, n_out)
         ### Your Code Ends >>>
 
     def forward(self, x):
         ### <<< Your Code Here
-        x = F.relu('???')
+        x = F.relu(self.fc1(x))
         ### Your Code Ends >>>
         x = self.fc2(x)
         return x
@@ -28,7 +28,7 @@ class SimpleCNN(nn.Module):
         h0 = n_in[1]
         assert n_in[1] == n_in[2], 'input must be square image'
         for c, k, s in zip(conv_channels, conv_kernels, conv_strides):
-            
+
             ### <<< Your Code Here
             # append nn.Conv2d with kernel size k, stride s
             self.conv_layers.append( '???' )
@@ -47,7 +47,7 @@ class SimpleCNN(nn.Module):
             ### <<< Your Code Here:
             self.fc_layers.append( '???' )
             ### Your Code Ends >>>
-            
+
             self.fc_layers.append( nn.ReLU() )
             h0 = h
         if type(n_out) is list:
