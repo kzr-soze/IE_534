@@ -28,14 +28,10 @@ class SimpleCNN(nn.Module):
         h0 = n_in[1]
         assert n_in[1] == n_in[2], 'input must be square image'
         for c, k, s in zip(conv_channels, conv_kernels, conv_strides):
-            print("Helllo")
-            print(c)
-            print(k)
-            print(s)
             # append nn.Conv2d with kernel size k, stride s
-            # self.conv_layers.append(nn.Conv2d(c0, c, kernel_size=k, stride=s))
+            self.conv_layers.append(nn.Conv2d(c0, c, kernel_size=k, stride=s))
             # append nn.ReLU layer
-            # self.conv_layers.append( nn.ReLU(inplace=True) )
+            self.conv_layers.append( nn.ReLU(inplace=True) )
             ## Your Code Ends >>>
 
             h0 = int(float(h0-k) / s + 1)
