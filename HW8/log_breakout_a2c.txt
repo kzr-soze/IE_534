@@ -1,0 +1,4 @@
+Namespace(algo='a2c', batch_size=128, checkpoint_freq=250000, discount=0.99, ent_coef=0.01, env='BreakoutDeterministic-v4', eps_decay=200000, frame_skip=1, frame_stack=4, load='', log='log.txt', lr=0.0006, niter=1000000, nproc=8, parallel_env=1, print_freq=500, replay_size=1000000, save_dir='breakout_a2c/', target_update=2500, train_freq=16, train_start=0, value_coef=0.5)
+observation space: Box(4, 84, 84)
+action space: Discrete(4)
+running on device cuda
