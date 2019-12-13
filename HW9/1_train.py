@@ -24,11 +24,12 @@ IMAGE_SIZE = 224
 NUM_CLASSES = 101
 batch_size = 100
 lr = 0.0001
-num_of_epochs = 10
+num_of_epochs = 15
 
 
 data_directory = '/projects/training/bayw/hdf5/UCF-101-hdf5/'
-class_list, train, test = getUCF101(base_directory = data_directory)
+data_info = '/projects/training/bayw/hdf5/'
+class_list, train, test = getUCF101(base_directory = data_info)
 
 model =  torchvision.models.resnet50(pretrained=True)
 model.fc = nn.Linear(2048,NUM_CLASSES)
