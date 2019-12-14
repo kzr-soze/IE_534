@@ -30,7 +30,8 @@ num_of_epochs = 10
 
 
 data_directory = '/projects/training/bayw/hdf5/UCF-101-hdf5'
-class_list, train, test = getUCF101(base_directory = data_directory)
+data_info = '/projects/training/bayw/hdf5/'
+class_list, train, test = getUCF101(base_directory = data_info)
 
 model =  resnet_3d.resnet50(sample_size=IMAGE_SIZE, sample_duration=16)
 pretrained = torch.load(data_directory + 'resnet-50-kinetics.pth')
