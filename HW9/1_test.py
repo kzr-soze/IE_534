@@ -23,6 +23,11 @@ from multiprocessing import Pool
 model = torch.load('single_frame.model')
 model.cuda()
 
+data_directory = '/projects/training/bayw/hdf5/UCF-101-hdf5/'
+data_info = '/projects/training/bayw/hdf5/'
+class_list, train, test = getUCF101(base_directory = data_info)
+
+
 ##### save predictions directory
 prediction_directory = 'UCF-101-predictions/'
 if not os.path.exists(prediction_directory):
@@ -30,10 +35,6 @@ if not os.path.exists(prediction_directory):
 for label in class_list:
     if not os.path.exists(prediction_directory+label+'/'):
         os.makedirs(prediction_directory+label+'/')
-
-data_directory = '/projects/training/bayw/hdf5/UCF-101-hdf5/'
-data_info = '/projects/training/bayw/hdf5/'
-class_list, train, test = getUCF101(base_directory = data_info)
 
 
 acc_top1 = 0.0
