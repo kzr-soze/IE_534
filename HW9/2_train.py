@@ -34,7 +34,7 @@ data_info = '/projects/training/bayw/hdf5/'
 class_list, train, test = getUCF101(base_directory = data_info)
 
 model =  resnet_3d.resnet50(sample_size=IMAGE_SIZE, sample_duration=16)
-pretrained = torch.load(data_directory + 'resnet-50-kinetics.pth')
+pretrained = torch.load(data_info + 'resnet-50-kinetics.pth')
 keys = [k for k,v in pretrained['state_dict'].items()]
 pretrained_state_dict = {k[7:]: v.cpu() for k, v in pretrained['state_dict'].items()}
 model.load_state_dict(pretrained_state_dict)
