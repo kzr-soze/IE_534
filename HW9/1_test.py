@@ -36,6 +36,12 @@ for label in class_list:
     if not os.path.exists(prediction_directory+label+'/'):
         os.makedirs(prediction_directory+label+'/')
 
+IMAGE_SIZE = 224
+NUM_CLASSES = 101
+batch_size = 100
+lr = 0.0001
+num_of_epochs = 10
+
 
 acc_top1 = 0.0
 acc_top5 = 0.0
