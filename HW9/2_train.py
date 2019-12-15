@@ -141,6 +141,7 @@ for epoch in range(0,num_of_epochs):
         train_accu.append(accuracy)
     accuracy_epoch = np.mean(train_accu)
     print(epoch, accuracy_epoch,time.time()-start_time)
+    torch.save(model,'3d_resnet.model')
 
     ##### TEST
     model.eval()
